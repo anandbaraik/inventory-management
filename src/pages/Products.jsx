@@ -2,8 +2,10 @@ import React, { useState } from 'react'
 import { useApp } from '../context/AppContextProvider'
 import ProductsTable from '../components/ProductsTable';
 import { Flex, Select, Text, Checkbox, Button } from '@chakra-ui/react';
+import { useNavigate } from 'react-router-dom';
 const Products = () => {
 
+	const navigate = useNavigate();
   const {activeProductDepartment, inventory, departments} = useApp();
 
   const [filterBy, setFilterBy] = useState({
@@ -71,7 +73,7 @@ const Products = () => {
               <option value="stock">Stock</option>
           </Select>
         </Flex>
-        <Button colorScheme='blue'>New</Button>
+        <Button colorScheme='blue' onClick={() => navigate('/add-product')}>New</Button>
       </Flex>
       <Flex>
         <ProductsTable filteredData={filteredData}/>

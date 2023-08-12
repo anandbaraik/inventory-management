@@ -9,7 +9,8 @@ import ErrorPage from "./pages/ErrorPage";
 import Dashboard from "./pages/Dashboard";
 import Department from './pages/Department';
 import Products from './pages/Products';
-
+import AddProduct from './pages/AddProduct';
+import ViewProduct from './pages/ViewProduct';
 const router = createBrowserRouter([
   {
     path: '/',
@@ -29,6 +30,14 @@ const router = createBrowserRouter([
       {
         path: '/products',
         element: <Products />,
+      },
+      {
+        path: '/add-product',
+        element: <AddProduct/>,
+      },
+      {
+        path: '/view-product/:id',
+        element: <ViewProduct/>,
       }
     ],
   }
