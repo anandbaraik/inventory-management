@@ -1,40 +1,43 @@
 import React from 'react';
-import {
-  ChakraProvider,
-  Box,
-  Text,
-  Link,
-  VStack,
-  Code,
-  Grid,
-  theme,
-} from '@chakra-ui/react';
-import { ColorModeSwitcher } from './ColorModeSwitcher';
-import { Logo } from './Logo';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { ChakraProvider } from '@chakra-ui/react';
+
+import theme from "./theme";
+import RootLayout from "./components/RootLayout";
+
+import ErrorPage from "./pages/ErrorPage";
+import Dashboard from "./pages/Dashboard";
+import Department from './pages/Department';
+import Products from './pages/Products';
+
+const router = createBrowserRouter([
+  {
+    path: '/',
+    errorElement: <ErrorPage />,
+    element: (
+        <RootLayout />
+    ),
+    children: [
+      {
+        index: true,
+        element: <Dashboard/>,
+      },
+      {
+        path: '/departments',
+        element: <Department />,
+      },
+      {
+        path: '/products',
+        element: <Products />,
+      }
+    ],
+  }
+]);
 
 function App() {
   return (
     <ChakraProvider theme={theme}>
-      <Box textAlign="center" fontSize="xl">
-        <Grid minH="100vh" p={3}>
-          <ColorModeSwitcher justifySelf="flex-end" />
-          <VStack spacing={8}>
-            <Logo h="40vmin" pointerEvents="none" />
-            <Text>
-              Edit <Code fontSize="xl">src/App.js</Code> and save to reload.
-            </Text>
-            <Link
-              color="teal.500"
-              href="https://chakra-ui.com"
-              fontSize="2xl"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learn Chakra
-            </Link>
-          </VStack>
-        </Grid>
-      </Box>
+      <RouterProvider router={router}/>
     </ChakraProvider>
   );
 }
